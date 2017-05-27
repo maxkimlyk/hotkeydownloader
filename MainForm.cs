@@ -72,36 +72,25 @@ namespace HotkeyDownloader
             }
         }
 
-        string GetStringFromClipboard()
-        {
-            string clipboardString;
-
-            if (Clipboard.ContainsData(DataFormats.Text))
-            {
-                clipboardString = Clipboard.GetData(DataFormats.Text) as string;
-                return clipboardString;
-            }
-
-            return "";
-        }
-
         void GetUrl()
         {
-            string clipboardString = GetStringFromClipboard();
+            string clipboardString = SelectedTextReader.GetStringFromClipboard();
             url = clipboardString;
 
-            // TODO: check whether clipboartString is URL
+            MessageBox.Show(url);
+
+            // TODO: check whether clipboardString is URL
         }
 
         void StartDownload()
         {
-            string clipboardString = GetStringFromClipboard();
+            /*string clipboardString = GetStringFromClipboard();
             if (clipboardString == "")
                 return;
 
             saveName = savePath + clipboardString;
 
-            Download(url, saveName);
+            Download(url, saveName);*/
         }
 
         protected override void WndProc(ref Message m)
@@ -110,7 +99,11 @@ namespace HotkeyDownloader
                 GetUrl();
 
             if (startDownloadHotkey != null && startDownloadHotkey.IsPressed(ref m))
-                StartDownload();
+            {
+                //StartDownload();
+                string selectedText = SelectedTextReader.GetSelectedText();
+                MessageBox.Show(selectedText);
+            }
 
             base.WndProc(ref m);
         }
