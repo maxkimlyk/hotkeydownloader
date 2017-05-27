@@ -16,9 +16,7 @@ namespace HotkeyDownloader
         Hotkey getURLHotkey;
         Hotkey startDownloadHotkey;
 
-        string url = "";
-        string saveName = "";
-        string savePath = "W:\\";
+        string defaultSavePath = "W:\\";
 
         public MainForm()
         {
@@ -38,74 +36,38 @@ namespace HotkeyDownloader
 
         private void button1_Click(object sender, EventArgs e)
         {
-            notifyIcon.ShowBalloonTip(3000, "Download", "To " + saveName, ToolTipIcon.None);
+            
         }
 
-        private void Download(string url, string saveName)
+        void StartDownloadDialog()
         {
-            WebClient webClient = new WebClient();
+            string url = "";
+            string saveName = defaultSavePath;
 
-            try
-            {
-                DateTime localDate = DateTime.Now;
-
-                ListViewItem item = new ListViewItem(saveName);
-                item.SubItems.Add("0%");
-                item.SubItems.Add(localDate.ToString());
-
-                ListViewItem listItem = listDownloads.Items.Add(item);
-
-                webClient.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) => {
-                    string strPersents = e.ProgressPercentage.ToString() + "%";
-                    listItem.SubItems[1].Text = strPersents;
-                };
-
-                System.Uri uri = new System.Uri(url);
-
-                webClient.DownloadFileAsync(uri, saveName);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        void GetUrl()
-        {
             string clipboardString = SelectedTextReader.GetStringFromClipboard();
-            url = clipboardString;
 
-            if (URLParser.IsURL(url))
+            if (URLParser.IsURL(clipboardString))
             {
-                // do nothing
+                url = clipboardString;
             }
-        }
 
-        void StartDownload()
-        {
-            GetUrl();
-
-            string name = SelectedTextReader.GetSelectedText();
-            if (name == "")
-                return;
-
-            saveName = savePath + name;
-            string extension = URLParser.GetExtension(url);
-            if (extension.Length > 0)
-                saveName += "." + extension;
-
-            notifyIcon.ShowBalloonTip(3000, "Download", "To " + saveName, ToolTipIcon.None);
-
-            Download(url, saveName);
+            string selected = SelectedTextReader.GetSelectedText();
+            if (selected != "")
+            {
+                saveName += selected;
+                string extension = URLParser.GetExtension(url) ;
+                if (extension != "")
+                    saveName += "." + extension;
+            }
+            
+            AddDownloadForm addDownloadForm = new AddDownloadForm(url, saveName, this);
+            addDownloadForm.Show();
         }
 
         protected override void WndProc(ref Message m)
         {
-            if (getURLHotkey != null && getURLHotkey.IsPressed(ref m))
-                GetUrl();
-
             if (startDownloadHotkey != null && startDownloadHotkey.IsPressed(ref m))
-                StartDownload();
+                StartDownloadDialog();
 
             base.WndProc(ref m);
         }

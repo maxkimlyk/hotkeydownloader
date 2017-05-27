@@ -98,12 +98,12 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListView listDownloads;
         private System.Windows.Forms.ColumnHeader File;
         private System.Windows.Forms.ColumnHeader Progress;
         private System.Windows.Forms.ColumnHeader Date;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.NotifyIcon notifyIcon;
+        public System.Windows.Forms.ListView listDownloads;
+        public System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }
 
