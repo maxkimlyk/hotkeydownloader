@@ -38,9 +38,7 @@ namespace HotkeyDownloader
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Download(
-                "https://psv4.userapi.com/c613824/u116484139/audios/d32e5eb628f1.mp3?extra=whDGzpzFl5P5lcp33cA2liSMeQStkC8aJ3bWLfQSuTQAuk8vxm6lYyDFIzTdBj9VOGuMGLd-26e-v9flgY6y6JZY4kKoHT_UMukuHcoYDv3LxUzmdUNuUCHpxy5o9RHVLyp-A-_S-mGJoA",
-                "W:\\Save That Fire.mp3");
+            notifyIcon.ShowBalloonTip(3000, "Download", "To " + saveName, ToolTipIcon.None);
         }
 
         private void Download(string url, string saveName)
@@ -77,7 +75,10 @@ namespace HotkeyDownloader
             string clipboardString = SelectedTextReader.GetStringFromClipboard();
             url = clipboardString;
 
-            // TODO: check whether clipboardString is URL
+            if (URLParser.IsURL(url))
+            {
+                // do nothing
+            }
         }
 
         void StartDownload()
@@ -89,6 +90,11 @@ namespace HotkeyDownloader
                 return;
 
             saveName = savePath + name;
+            string extension = URLParser.GetExtension(url);
+            if (extension.Length > 0)
+                saveName += "." + extension;
+
+            notifyIcon.ShowBalloonTip(3000, "Download", "To " + saveName, ToolTipIcon.None);
 
             Download(url, saveName);
         }
