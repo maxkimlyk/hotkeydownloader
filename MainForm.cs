@@ -77,20 +77,20 @@ namespace HotkeyDownloader
             string clipboardString = SelectedTextReader.GetStringFromClipboard();
             url = clipboardString;
 
-            MessageBox.Show(url);
-
             // TODO: check whether clipboardString is URL
         }
 
         void StartDownload()
         {
-            /*string clipboardString = GetStringFromClipboard();
-            if (clipboardString == "")
+            GetUrl();
+
+            string name = SelectedTextReader.GetSelectedText();
+            if (name == "")
                 return;
 
-            saveName = savePath + clipboardString;
+            saveName = savePath + name;
 
-            Download(url, saveName);*/
+            Download(url, saveName);
         }
 
         protected override void WndProc(ref Message m)
@@ -99,11 +99,7 @@ namespace HotkeyDownloader
                 GetUrl();
 
             if (startDownloadHotkey != null && startDownloadHotkey.IsPressed(ref m))
-            {
-                //StartDownload();
-                string selectedText = SelectedTextReader.GetSelectedText();
-                MessageBox.Show(selectedText);
-            }
+                StartDownload();
 
             base.WndProc(ref m);
         }

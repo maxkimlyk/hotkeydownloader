@@ -56,10 +56,15 @@ namespace HotkeyDownloader
 
         public static string GetSelectedText()
         {
+            object savedObject = Clipboard.GetData(DataFormats.UnicodeText);
+
             SendKeys.SendWait("^c");
             SendKeys.Flush();
 
             string clipboardString = GetStringFromClipboard();
+
+            Clipboard.SetData(DataFormats.UnicodeText, savedObject);
+
             return clipboardString;
         }
     }
