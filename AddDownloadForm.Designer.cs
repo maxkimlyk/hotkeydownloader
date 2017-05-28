@@ -76,7 +76,7 @@
             this.buttonStart.Location = new System.Drawing.Point(214, 64);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(177, 23);
-            this.buttonStart.TabIndex = 4;
+            this.buttonStart.TabIndex = 3;
             this.buttonStart.Text = "Start Download";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
@@ -87,7 +87,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(397, 64);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 5;
+            this.buttonCancel.TabIndex = 4;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -97,7 +97,7 @@
             this.buttonBrowse.Location = new System.Drawing.Point(403, 37);
             this.buttonBrowse.Name = "buttonBrowse";
             this.buttonBrowse.Size = new System.Drawing.Size(69, 22);
-            this.buttonBrowse.TabIndex = 6;
+            this.buttonBrowse.TabIndex = 2;
             this.buttonBrowse.Text = "Browse...";
             this.buttonBrowse.UseVisualStyleBackColor = true;
             this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);

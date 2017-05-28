@@ -14,15 +14,16 @@ namespace HotkeyDownloader
     public partial class MainForm : Form
     {
         Hotkey startDownloadHotkey;
+        Settings settings;
 
         string defaultSavePath = "W:\\";
 
         public MainForm()
         {
             InitializeComponent();
-
             startDownloadHotkey = new Hotkey(this.Handle);
             startDownloadHotkey.Register(Hotkey.Modifiers.Ctrl, Keys.R);
+            settings = new Settings();
         }
 
         ~MainForm()
@@ -33,7 +34,7 @@ namespace HotkeyDownloader
         void StartDownloadDialog()
         {
             string url = "";
-            string saveName = defaultSavePath;
+            string saveName = settings.DefaultSavePath;
 
             string clipboardString = SelectedTextReader.GetStringFromClipboard();
 
@@ -61,6 +62,17 @@ namespace HotkeyDownloader
                 StartDownloadDialog();
 
             base.WndProc(ref m);
+        }
+
+        private void buttonAddDownload_Click(object sender, EventArgs e)
+        {
+            StartDownloadDialog();
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            SettingsForm settingsForm = new SettingsForm(settings);
+            settingsForm.Show();
         }
     }
 }
