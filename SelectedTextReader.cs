@@ -65,10 +65,7 @@ namespace HotkeyDownloader
 
             Clipboard.SetData(DataFormats.UnicodeText, savedObject);
 
-            if (clipboardString != savedObject.ToString())
-                return clipboardString;
-            else
-                return "";
+            return clipboardString;
         }
     }
 }

@@ -13,7 +13,6 @@ namespace HotkeyDownloader
 {
     public partial class MainForm : Form
     {
-        Hotkey getURLHotkey;
         Hotkey startDownloadHotkey;
 
         string defaultSavePath = "W:\\";
@@ -22,21 +21,13 @@ namespace HotkeyDownloader
         {
             InitializeComponent();
 
-            getURLHotkey = new Hotkey(this.Handle);
             startDownloadHotkey = new Hotkey(this.Handle);
-            getURLHotkey.Register(Hotkey.Modifiers.Ctrl, Keys.T);
             startDownloadHotkey.Register(Hotkey.Modifiers.Ctrl, Keys.R);
         }
 
         ~MainForm()
         {
-            getURLHotkey.Unregister();
             startDownloadHotkey.Unregister();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
         }
 
         void StartDownloadDialog()
