@@ -1,29 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
 
 namespace HotkeyDownloader
 {
     public partial class MainForm : Form
     {
         Hotkey startDownloadHotkey;
-        Settings settings;
-
-        string defaultSavePath = "W:\\";
 
         public MainForm()
         {
             InitializeComponent();
             startDownloadHotkey = new Hotkey(this.Handle);
             startDownloadHotkey.Register(Hotkey.Modifiers.Ctrl, Keys.R);
-            settings = new Settings();
         }
 
         ~MainForm()
@@ -34,22 +22,27 @@ namespace HotkeyDownloader
         void StartDownloadDialog()
         {
             string url = "";
-            string saveName = settings.DefaultSavePath;
-
+            string saveName = (string)(Properties.Settings.Default["DefaultSavePath"]);
             string clipboardString = SelectedTextReader.GetStringFromClipboard();
 
-            if (URLParser.IsURL(clipboardString))
+            bool isUrl = URLParser.IsURL(clipboardString);
+            string nameFromUrl = "";
+            if (isUrl)
             {
-                url = clipboardString;
+                nameFromUrl = URLParser.GetFileName(clipboardString);
             }
 
             string selected = SelectedTextReader.GetSelectedText();
             if (selected != "")
             {
                 saveName += selected;
-                string extension = URLParser.GetExtension(url) ;
+                string extension = URLParser.GetExtension(clipboardString);
                 if (extension != "")
                     saveName += "." + extension;
+            }
+            else if (nameFromUrl != "")
+            {
+                saveName += nameFromUrl;
             }
             
             AddDownloadForm addDownloadForm = new AddDownloadForm(url, saveName, this);
@@ -71,7 +64,7 @@ namespace HotkeyDownloader
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            SettingsForm settingsForm = new SettingsForm(settings);
+            SettingsForm settingsForm = new SettingsForm();
             settingsForm.Show();
         }
     }

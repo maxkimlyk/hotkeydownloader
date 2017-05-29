@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,10 +39,13 @@ namespace HotkeyDownloader
 
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
+            string currentPath = Path.GetDirectoryName(textBoxSaveName.Text);   
+            string currentName = Path.GetFileName(textBoxSaveName.Text);
+
             SaveFileDialog dialog = new SaveFileDialog();
-            int lastSlash = textBoxSaveName.Text.LastIndexOf("\\");
-            string fileName = textBoxSaveName.Text.Substring(lastSlash + 1);
-            dialog.FileName = fileName;
+            dialog.InitialDirectory = currentPath;
+            dialog.FileName = currentName;
+
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {

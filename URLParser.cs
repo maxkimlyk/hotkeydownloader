@@ -31,5 +31,11 @@ namespace HotkeyDownloader
 
             return extension;
         }
+
+        public static string GetFileName(string url)
+        {
+            Uri uri = new Uri(url);
+            return Path.GetFileName(uri.AbsolutePath);
+        }
     }
 }
