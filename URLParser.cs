@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace HotkeyDownloader
 {
@@ -20,15 +21,13 @@ namespace HotkeyDownloader
         {
             string extension = "";
 
-            int questPos = url.LastIndexOf('?');
-            if (questPos > 0)
+            Uri uri = new Uri(url);
+            if (Path.HasExtension(uri.AbsoluteUri))
             {
-                url = url.Substring(0, questPos);
+                extension = Path.GetExtension(uri.AbsolutePath);
             }
-            int pointPos = url.LastIndexOf('.');
-            int extLength = url.Length - pointPos - 1;
-            if (extLength > 0 && extLength <= 5)
-                extension = url.Substring(pointPos + 1, extLength);
+
+            extension = extension.Replace(".", "");
 
             return extension;
         }

@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
 using System.Runtime.InteropServices;
 
 namespace HotkeyDownloader
@@ -56,16 +47,21 @@ namespace HotkeyDownloader
 
         public static string GetSelectedText()
         {
-            object savedObject = Clipboard.GetData(DataFormats.UnicodeText);
+            string oldString = Clipboard.GetData(DataFormats.UnicodeText).ToString();
 
             SendKeys.SendWait("^c");
             SendKeys.Flush();
 
-            string clipboardString = GetStringFromClipboard();
+            string newString = GetStringFromClipboard();
 
-            Clipboard.SetData(DataFormats.UnicodeText, savedObject);
+            if (oldString == newString)
+            {
+                newString = "";
+            }
 
-            return clipboardString;
+            Clipboard.SetData(DataFormats.UnicodeText, oldString);
+
+            return newString;
         }
     }
 }
