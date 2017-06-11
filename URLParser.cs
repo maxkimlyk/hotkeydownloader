@@ -19,17 +19,24 @@ namespace HotkeyDownloader
 
         public static string GetExtension(string url)
         {
-            string extension = "";
-
-            Uri uri = new Uri(url);
-            if (Path.HasExtension(uri.AbsoluteUri))
+            try
             {
-                extension = Path.GetExtension(uri.AbsolutePath);
+                string extension = "";
+
+                Uri uri = new Uri(url);
+                if (Path.HasExtension(uri.AbsoluteUri))
+                {
+                    extension = Path.GetExtension(uri.AbsolutePath);
+                }
+
+                extension = extension.Replace(".", "");
+
+                return extension;
             }
-
-            extension = extension.Replace(".", "");
-
-            return extension;
+            catch
+            {
+                return "";
+            }
         }
 
         public static string GetFileName(string url)

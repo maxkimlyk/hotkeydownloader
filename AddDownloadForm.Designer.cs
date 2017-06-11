@@ -30,12 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddDownloadForm));
             this.textBoxURL = new System.Windows.Forms.TextBox();
-            this.textBoxSaveName = new System.Windows.Forms.TextBox();
+            this.textBoxSavePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonBrowse = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxSaveName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxURL
@@ -45,12 +47,12 @@
             this.textBoxURL.Size = new System.Drawing.Size(395, 20);
             this.textBoxURL.TabIndex = 0;
             // 
-            // textBoxSaveName
+            // textBoxSavePath
             // 
-            this.textBoxSaveName.Location = new System.Drawing.Point(77, 38);
-            this.textBoxSaveName.Name = "textBoxSaveName";
-            this.textBoxSaveName.Size = new System.Drawing.Size(325, 20);
-            this.textBoxSaveName.TabIndex = 1;
+            this.textBoxSavePath.Location = new System.Drawing.Point(77, 38);
+            this.textBoxSavePath.Name = "textBoxSavePath";
+            this.textBoxSavePath.Size = new System.Drawing.Size(325, 20);
+            this.textBoxSavePath.TabIndex = 1;
             // 
             // label1
             // 
@@ -66,14 +68,14 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Save name:";
+            this.label2.Text = "Save path:";
             // 
             // buttonStart
             // 
             this.buttonStart.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonStart.Location = new System.Drawing.Point(214, 64);
+            this.buttonStart.Location = new System.Drawing.Point(214, 105);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(177, 23);
             this.buttonStart.TabIndex = 3;
@@ -84,7 +86,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(397, 64);
+            this.buttonCancel.Location = new System.Drawing.Point(397, 105);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 4;
@@ -102,19 +104,37 @@
             this.buttonBrowse.UseVisualStyleBackColor = true;
             this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 70);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "SaveName:";
+            // 
+            // textBoxSaveName
+            // 
+            this.textBoxSaveName.Location = new System.Drawing.Point(77, 67);
+            this.textBoxSaveName.Name = "textBoxSaveName";
+            this.textBoxSaveName.Size = new System.Drawing.Size(395, 20);
+            this.textBoxSaveName.TabIndex = 6;
+            // 
             // AddDownloadForm
             // 
             this.AcceptButton = this.buttonStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(484, 94);
+            this.ClientSize = new System.Drawing.Size(484, 140);
+            this.Controls.Add(this.textBoxSaveName);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxSaveName);
+            this.Controls.Add(this.textBoxSavePath);
             this.Controls.Add(this.textBoxURL);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -132,11 +152,13 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBoxURL;
-        private System.Windows.Forms.TextBox textBoxSaveName;
+        private System.Windows.Forms.TextBox textBoxSavePath;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonBrowse;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxSaveName;
     }
 }

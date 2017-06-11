@@ -22,19 +22,21 @@ namespace HotkeyDownloader
         void StartDownloadDialog()
         {
             string url = "";
-            string saveName = (string)(Properties.Settings.Default["DefaultSavePath"]);
+            string saveName = "";
             string clipboardString = SelectedTextReader.GetStringFromClipboard();
 
             bool isUrl = URLParser.IsURL(clipboardString);
             string nameFromUrl = "";
             if (isUrl)
             {
+                url = clipboardString;
                 nameFromUrl = URLParser.GetFileName(clipboardString);
             }
 
             string selected = SelectedTextReader.GetSelectedText();
             if (selected != "")
             {
+                selected = selected.Trim();
                 saveName += selected;
                 string extension = URLParser.GetExtension(clipboardString);
                 if (extension != "")

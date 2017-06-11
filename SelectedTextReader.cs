@@ -8,37 +8,13 @@ namespace HotkeyDownloader
 {
     class SelectedTextReader
     {
-        [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out Point pt);
-
-        [DllImport("user32.dll", EntryPoint = "SendMessageW")]
-        public static extern int SendMessageW([InAttribute] System.IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
-        public const int WM_GETTEXT = 13;
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        internal static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        internal static extern IntPtr GetFocus();
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        internal static extern int GetWindowThreadProcessId(int handle, out int processId);
-
-        [DllImport("user32", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
-        internal static extern int AttachThreadInput(int idAttach, int idAttachTo, bool fAttach);
-        [DllImport("kernel32.dll")]
-        internal static extern int GetCurrentThreadId();
-
-        [DllImport("user32", CharSet = CharSet.Auto, SetLastError = true)]
-        internal static extern int GetWindowText(IntPtr hWnd, [Out, MarshalAs(UnmanagedType.LPTStr)] StringBuilder lpString, int nMaxCount);
-
         public static string GetStringFromClipboard()
         {
             string clipboardString;
 
             if (Clipboard.ContainsData(DataFormats.UnicodeText))
             {
-                clipboardString = Clipboard.GetData(DataFormats.UnicodeText) as string;
+                clipboardString = Clipboard.GetData(DataFormats.UnicodeText).ToString();
                 return clipboardString;
             }
 
@@ -47,7 +23,13 @@ namespace HotkeyDownloader
 
         public static string GetSelectedText()
         {
-            string oldString = Clipboard.GetData(DataFormats.UnicodeText).ToString();
+            string oldString = "";
+
+            var clipboardData = Clipboard.GetData(DataFormats.UnicodeText);
+            if (clipboardData != null)
+            {
+                oldString = clipboardData.ToString();
+            }
 
             SendKeys.SendWait("^c");
             SendKeys.Flush();

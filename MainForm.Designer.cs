@@ -66,7 +66,7 @@
             // Date
             // 
             this.Date.Text = "Date";
-            this.Date.Width = 95;
+            this.Date.Width = 169;
             // 
             // notifyIcon
             // 
